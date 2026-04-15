@@ -1,0 +1,23 @@
+#include <Wire.h>
+#include "Adafruit_MCP9808.h"
+
+Adafruit_MCP9808 tempsensor = Adafruit_MCP9808();
+
+void setup() {
+  Serial.begin(9600);
+  
+  if (!tempsensor.begin(0x18)) {
+    Serial.println("Sensor not found!");
+    while (1);
+  }
+}
+
+void loop() {
+  float tempC = tempsensor.readTempC();
+  
+  Serial.print("Temp: ");
+  Serial.print(tempC);
+  Serial.println(" °C");
+  
+  delay(1000);
+}
